@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.edu.ifb.model.ejb.ConverterBean;
+import br.edu.ifb.model.ejb.ConverterEjb;
 
 /**
  * Servlet implementation class MinhaServlet
@@ -17,7 +17,7 @@ public class MinhaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private ConverterBean converterBean ;
+	private ConverterEjb converterEjb ;
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -34,7 +34,7 @@ public class MinhaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		converterBean.acessarBanco();
+		converterEjb.acessarBanco();
 	}
 
 	/**

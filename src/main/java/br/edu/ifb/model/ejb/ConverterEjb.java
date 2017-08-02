@@ -10,8 +10,8 @@ import org.apache.log4j.Logger;
 import br.edu.ifb.model.jpa.Employee;
 
 @Stateless
-public class ConverterBean {
-	private final Logger logger = Logger.getLogger(ConverterBean.class);
+public class ConverterEjb {
+	private final Logger logger = Logger.getLogger(ConverterEjb.class);
 
 	@PersistenceContext(unitName="MinhaPersistenceUnit", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;

@@ -6,6 +6,12 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.1</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax/javaee-api -->
 		<dependency>
 			<groupId>javax</groupId>

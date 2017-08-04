@@ -5,13 +5,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.edu.ifb.model.jpa.Employee;
 
 @Stateless
 public class ConverterEjb {
-	private final Logger logger = Logger.getLogger(ConverterEjb.class);
+	private final Logger logger = LoggerFactory.getLogger(ConverterEjb.class);
 
 	@PersistenceContext(unitName="MinhaPersistenceUnit", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;

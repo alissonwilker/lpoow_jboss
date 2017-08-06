@@ -10,21 +10,11 @@
 		<location>/error.xhtml</location>
 	</error-page>
 	<servlet>
-		<display-name>JAXRSApplicationServlet</display-name>
-		<servlet-name>JAXRSApplicationServlet</servlet-name>
-		<servlet-class>javax.ws.rs.core.Application</servlet-class>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
-	<servlet>
 		<display-name>FacesServlet</display-name>
 		<servlet-name>FacesServlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>JAXRSApplicationServlet</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FacesServlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>

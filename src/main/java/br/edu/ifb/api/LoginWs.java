@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import br.edu.ifb.model.business.ILoginBusiness;
 
-@Path("/api/login")
+@Path("/login")
 public class LoginWs {
 	@Inject
 	private ILoginBusiness loginBusiness;

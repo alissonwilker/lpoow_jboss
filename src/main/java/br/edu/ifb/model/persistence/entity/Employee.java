@@ -1,4 +1,4 @@
-package br.edu.ifb.model.jpa;
+package br.edu.ifb.model.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -11,14 +11,14 @@
 	<h:form>
 		<p:inputText id="usuario" required="true"
 			requiredMessage="#{msg['login.digiteUsuario']}"
-			value="#{autenticadorMBean.usuario}"
+			value="#{usuario}"
 			a:placeholder="#{msg['login.usuario']}" />
 		<p:inputText id="senha" required="true"
 			requiredMessage="#{msg['login.digiteSenha']}"
-			value="#{autenticadorMBean.senha}"
+			value="#{senha}"
 			a:placeholder="#{msg['login.senha']}" />
 		<h:commandButton value="#{msg['login.logar']}"
-			action="#{autenticadorMBean.autenticar}" />
+			action="#{loginController.autenticar(usuario, senha)}" />
 		<h:message for="usuario" />
 		<h:message for="senha" />
 	</h:form>

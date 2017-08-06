@@ -23,7 +23,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>JAXRSApplicationServlet</servlet-name>
-		<url-pattern>/helloworld/*</url-pattern>
+		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FacesServlet</servlet-name>

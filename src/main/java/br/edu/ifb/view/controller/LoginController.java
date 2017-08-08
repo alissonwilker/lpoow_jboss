@@ -2,14 +2,14 @@ package br.edu.ifb.view.controller;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.edu.ifb.model.business.ILoginBusiness;
 
 @Named
-@ApplicationScoped
+@RequestScoped
 public class LoginController implements Serializable {
 
 	private static final long serialVersionUID = 1L;

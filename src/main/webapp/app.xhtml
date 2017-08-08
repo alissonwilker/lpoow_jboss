@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{msg['app.title']}</title>
+</h:head>
+<h:body>
+	<ul>
+		<li><h:link outcome="bibliotecas"
+				value="#{msg['app.gerenciarBibliotecas']}" /></li>
+		<li><h:link outcome="clientes"
+				value="#{msg['app.gerenciarClientes']}" /></li>
+		<li><h:link outcome="livros"
+				value="#{msg['app.gerenciarLivros']}" /></li>
+		<h:outputLabel for="bibliotecas" value="#{msg['app.bibliotecas']}"/>
+		<p:dataTable id="bibliotecas" var="biblioteca" value="#{bibliotecasController.listaBibliotecas}">
+			<p:column headerText="Id">
+				<h:outputText value="#{biblioteca.id}" />
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputText value="#{biblioteca.nome}" />
+			</p:column>
+		</p:dataTable>
+	</ul>
+</h:body>
+</html>

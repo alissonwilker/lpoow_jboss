@@ -15,7 +15,7 @@ public class LoginBusiness implements ILoginBusiness, Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean isAutenticado = false;
 	private String usuarioAutenticado = null;
-
+	
 	@Inject
 	private ILoginDao loginDao;
 	
@@ -29,7 +29,6 @@ public class LoginBusiness implements ILoginBusiness, Serializable {
 		if (loginDao.validarLogin(usuario, senha)) {
 			isAutenticado = true;
 			this.usuarioAutenticado = usuario;
-
 		} else {
 			isAutenticado = false;
 			this.usuarioAutenticado = null;

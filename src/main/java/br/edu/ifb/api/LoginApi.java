@@ -10,27 +10,25 @@ import javax.ws.rs.core.MediaType;
 import br.edu.ifb.model.business.ILoginBusiness;
 
 @Path("/login")
+@Produces({ MediaType.APPLICATION_JSON })
 public class LoginApi {
 	@Inject
 	private ILoginBusiness loginBusiness;
 
 	@GET
 	@Path("/autenticar/{usuario}/{senha}")
-	@Produces({ MediaType.APPLICATION_JSON })
 	public boolean autenticar(@PathParam("usuario") String usuario, @PathParam("senha") String senha) {
 		return loginBusiness.autenticar(usuario, senha);
 	}
 
 	@GET
 	@Path("/isAutenticado")
-	@Produces({ MediaType.APPLICATION_JSON })
 	public boolean isAutenticado() {
 		return loginBusiness.isAutenticado();
 	}
 
 	@GET
 	@Path("/getUsuarioAutenticado")
-	@Produces({ MediaType.APPLICATION_JSON })
 	public String getUsuarioAutenticado() {
 		return loginBusiness.getUsuarioAutenticado();
 	}

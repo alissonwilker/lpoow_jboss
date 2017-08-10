@@ -9,19 +9,52 @@
 </h:head>
 <h:body>
 	<ul>
-		<li><h:link outcome="bibliotecas"
-				value="#{msg['app.gerenciarBibliotecas']}" /></li>
-		<li><h:link outcome="clientes"
-				value="#{msg['app.gerenciarClientes']}" /></li>
-		<li><h:link outcome="livros"
-				value="#{msg['app.gerenciarLivros']}" /></li>
+		<li><h:link outcome="cadastrarBiblioteca"
+				value="#{msg['app.cadastrarBiblioteca']}" /></li>
+		<li><h:link outcome="cadastrarCliente"
+				value="#{msg['app.cadastrarCliente']}" /></li>
+		<li><h:link outcome="cadastrarLivro"
+				value="#{msg['app.cadastrarLivro']}" /></li>
 		<h:outputLabel for="bibliotecas" value="#{msg['app.bibliotecas']}"/>
-		<p:dataTable id="bibliotecas" var="biblioteca" value="#{bibliotecasController.listaBibliotecas}">
-			<p:column headerText="Id">
+		<p:dataTable id="bibliotecas" var="biblioteca" value="#{bibliotecasController.itens}">
+			<p:column headerText="#{msg['app.id']}">
 				<h:outputText value="#{biblioteca.id}" />
 			</p:column>
-			<p:column headerText="Nome">
-				<h:outputText value="#{biblioteca.nome}" />
+			<p:column headerText="#{msg['bibliotecas.nomeBiblioteca']}">
+				<h:link outcome="gerenciarBiblioteca" value="#{biblioteca.nome}"/>
+			</p:column>
+			<p:column headerText="#{msg['app.remover']}">
+				<h:form>
+					<h:commandLink action="#{bibliotecasController.removerBiblioteca(biblioteca.id)}" value="#{msg['app.remover']}"/>
+				</h:form>
+			</p:column>
+		</p:dataTable>
+		<h:outputLabel for="clientes" value="#{msg['app.clientes']}"/>
+		<p:dataTable id="clientes" var="cliente" value="#{clientesController.itens}">
+			<p:column headerText="#{msg['app.cpf']}">
+				<h:outputText value="#{cliente.cpf}" />
+			</p:column>
+			<p:column headerText="#{msg['clientes.nomeCliente']}">
+				<h:link outcome="gerenciarCliente" value="#{cliente.nome}"/>
+			</p:column>
+			<p:column headerText="#{msg['app.remover']}">
+				<h:form>
+					<h:commandLink action="#{clientesController.removerCliente(cliente.id)}" value="#{msg['app.remover']}"/>
+				</h:form>
+			</p:column>
+		</p:dataTable>
+		<h:outputLabel for="livros" value="#{msg['app.livros']}"/>
+		<p:dataTable id="livros" var="livro" value="#{livrosController.itens}">
+			<p:column headerText="#{msg['app.isbn']}">
+				<h:outputText value="#{livro.isbn}" />
+			</p:column>
+			<p:column headerText="#{msg['livros.nomeLivro']}">
+				<h:link outcome="gerenciarLivro" value="#{livro.nome}"/>
+			</p:column>
+			<p:column headerText="#{msg['app.remover']}">
+				<h:form>
+					<h:commandLink action="#{livrosController.removerLivro(livro.id)}" value="#{msg['app.remover']}"/>
+				</h:form>
 			</p:column>
 		</p:dataTable>
 	</ul>

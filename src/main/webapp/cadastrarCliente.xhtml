@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{msg['app.cadastrarCliente']}</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:inputText id="cpfCliente" required="true"
+			requiredMessage="#{msg['clientes.digiteCpfCliente']}"
+			value="#{cpfCliente}" a:placeholder="#{msg['clientes.cpfCliente']}" />
+		<p:inputText id="nomeCliente" required="true"
+			requiredMessage="#{msg['clientes.digiteNomeCliente']}"
+			value="#{nomeCliente}" a:placeholder="#{msg['clientes.nomeCliente']}" />
+		<h:commandButton value="#{msg['app.ok']}"
+			action="#{clientesController.adicionarCliente(cpfCliente, nomeCliente)}" />
+	</h:form>
+	<h:message for="cpfCliente" />
+	<h:message for="nomeCliente" />
+	<h:outputFormat rendered="#{param['entidadeJaExiste']}"
+		value="#{msg['excecao.entidadeJaExiste']}">
+		<f:param value="#{msg['clientes.cliente']}" />
+	</h:outputFormat>
+</h:body>
+</html>

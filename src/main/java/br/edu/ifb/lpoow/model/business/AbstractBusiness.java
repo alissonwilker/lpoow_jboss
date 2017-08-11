@@ -26,13 +26,8 @@ public abstract class AbstractBusiness<T, PK extends Serializable> implements IB
 	}
 
 	@Override
-	public void remover(PK chavePrimaria) {
-		dao.remover(chavePrimaria);
-	}
-	
-	@Override
-	public void atualizar(T entidade) {
-		dao.atualizar(entidade);
+	public T atualizar(T entidade) {
+		return dao.atualizar(entidade);
 	}
 
 	@Override

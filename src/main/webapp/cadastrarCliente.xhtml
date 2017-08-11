@@ -10,20 +10,23 @@
 </h:head>
 <h:body>
 	<h:form>
-		<p:inputText id="cpfCliente" required="true"
+		<p:outputLabel for="cpfCliente" value="#{msg['clientes.cpfCliente']}:" />
+		<p:inputMask id="cpfCliente" required="true"
 			requiredMessage="#{msg['clientes.digiteCpfCliente']}"
-			value="#{cpfCliente}" a:placeholder="#{msg['clientes.cpfCliente']}" />
+			value="#{cpfCliente}" a:placeholder="#{msg['clientes.cpfCliente']}"
+			mask="#{msg['clientes.cpfMask']}" validator="cpfValidator" converter="cpfConverter">
+		</p:inputMask>
+		<p />
+		<p:outputLabel for="nomeCliente"
+			value="#{msg['clientes.nomeCliente']}:" />
 		<p:inputText id="nomeCliente" required="true"
 			requiredMessage="#{msg['clientes.digiteNomeCliente']}"
-			value="#{nomeCliente}" a:placeholder="#{msg['clientes.nomeCliente']}" />
-		<h:commandButton value="#{msg['app.ok']}"
+			value="#{nomeCliente}" a:placeholder="#{msg['clientes.nomeCliente']}"
+			maxlength="20" />
+		<p />
+		<p:commandButton value="#{msg['app.ok']}"
 			action="#{clientesController.adicionarCliente(cpfCliente, nomeCliente)}" />
 	</h:form>
-	<h:message for="cpfCliente" />
-	<h:message for="nomeCliente" />
-	<h:outputFormat rendered="#{param['entidadeJaExiste']}"
-		value="#{msg['excecao.entidadeJaExiste']}">
-		<f:param value="#{msg['clientes.cliente']}" />
-	</h:outputFormat>
+	<p:messages autoUpdate="true" closable="true" />
 </h:body>
 </html>

@@ -12,6 +12,6 @@ public interface IController<T, PK extends Serializable> {
 	public List<T> getItens();
 
 	public T getItem(PK chavePrimaria);
-
-	void remover(PK chavePrimaria);
+	
+	public void remover(T entidade);
 }

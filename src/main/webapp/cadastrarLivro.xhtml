@@ -10,20 +10,22 @@
 </h:head>
 <h:body>
 	<h:form>
-		<p:inputText id="isbnLivro" required="true"
+		<p:outputLabel for="isbnLivro" value="#{msg['livros.isbnLivro']}:" />
+		<p:inputMask id="isbnLivro" required="true"
 			requiredMessage="#{msg['livros.digiteIsbnLivro']}"
-			value="#{isbnLivro}" a:placeholder="#{msg['livros.isbnLivro']}" />
+			value="#{isbnLivro}" a:placeholder="#{msg['livros.isbnLivro']}"
+			mask="#{msg['livros.isbnMask']}" validator="isbnValidator" converter="isbnConverter">
+		</p:inputMask>
+		<p />
+		<p:outputLabel for="nomeLivro" value="#{msg['livros.nomeLivro']}:" />
 		<p:inputText id="nomeLivro" required="true"
 			requiredMessage="#{msg['livros.digiteNomeLivro']}"
-			value="#{nomeLivro}" a:placeholder="#{msg['livros.nomeLivro']}" />
-		<h:commandButton value="#{msg['app.ok']}"
+			value="#{nomeLivro}" a:placeholder="#{msg['livros.nomeLivro']}"
+			maxlength="20" />
+		<p />
+		<p:commandButton value="#{msg['app.ok']}"
 			action="#{livrosController.adicionarLivro(isbnLivro, nomeLivro)}" />
 	</h:form>
-	<h:message for="isbnLivro" />
-	<h:message for="nomeLivro" />
-	<h:outputFormat rendered="#{param['entidadeJaExiste']}"
-		value="#{msg['excecao.entidadeJaExiste']}">
-		<f:param value="#{msg['livros.livro']}" />
-	</h:outputFormat>
+	<p:messages autoUpdate="true" closable="true" />
 </h:body>
 </html>

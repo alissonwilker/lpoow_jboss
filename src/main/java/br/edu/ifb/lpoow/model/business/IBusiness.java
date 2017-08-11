@@ -13,9 +13,8 @@ public interface IBusiness<T, PK extends Serializable> {
 
 	public void remover(T entidade);
 
-	public void atualizar(T entidade);
+	public T atualizar(T entidade);
 
 	public T recuperar(PK chavePrimaria);
 
-	void remover(PK chavePrimaria);
 }

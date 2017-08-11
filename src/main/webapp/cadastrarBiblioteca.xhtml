@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
@@ -10,17 +9,16 @@
 </h:head>
 <h:body>
 	<h:form>
+		<p:outputLabel for="nomeBiblioteca"
+			value="#{msg['bibliotecas.nomeBiblioteca']}:" />
 		<p:inputText id="nomeBiblioteca" required="true"
 			requiredMessage="#{msg['bibliotecas.digiteNomeBiblioteca']}"
 			value="#{nomeBiblioteca}"
-			a:placeholder="#{msg['bibliotecas.nomeBiblioteca']}" />
-		<h:commandButton value="#{msg['app.ok']}"
+			a:placeholder="#{msg['bibliotecas.nomeBiblioteca']}" maxlength="20" />
+		<p />
+		<p:commandButton value="#{msg['app.ok']}"
 			action="#{bibliotecasController.adicionarBiblioteca(nomeBiblioteca)}" />
 	</h:form>
-	<h:message for="nomeBiblioteca" />
-	<h:outputFormat rendered="#{param['entidadeJaExiste']}"
-		value="#{msg['excecao.entidadeJaExiste']}">
-		<f:param value="#{msg['bibliotecas.biblioteca']}" />
-	</h:outputFormat>
+	<p:messages autoUpdate="true" closable="true" />
 </h:body>
 </html>

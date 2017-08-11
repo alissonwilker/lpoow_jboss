@@ -25,9 +25,9 @@ public class Cliente implements Serializable {
 	private int id;
 
 	@Column(name = "CPF", nullable = false, unique = true, length = 11)
-	private int cpf;
+	private String cpf;
 
-	@Column(name = "NOME", length = 20, unique = false, nullable = false)
+	@Column(name = "NOME", nullable = false, unique = false, length = 20)
 	private String nome;
 
 	@ManyToMany
@@ -36,7 +36,7 @@ public class Cliente implements Serializable {
 	public Cliente() {
 	}
 
-	public Cliente(int cpf, String nome) {
+	public Cliente(String cpf, String nome) {
 		setCpf(cpf);
 		setNome(nome);
 	}
@@ -53,11 +53,11 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

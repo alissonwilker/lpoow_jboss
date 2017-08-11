@@ -22,10 +22,10 @@ public abstract class AbstractController<T, PK extends Serializable> implements 
 	}
 
 	@Override
-	public void remover(PK chavePrimaria) {
-		business.remover(chavePrimaria);
+	public void remover(T entidade) {
+		business.remover(entidade);
 	}
-	
+
 	@Override
 	public List<T> getItens() {
 		return business.listar();
@@ -35,5 +35,5 @@ public abstract class AbstractController<T, PK extends Serializable> implements 
 	public T getItem(PK chavePrimaria) {
 		return business.recuperar(chavePrimaria);
 	}
-	
+
 }

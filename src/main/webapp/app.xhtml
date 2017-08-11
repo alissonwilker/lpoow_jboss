@@ -1,62 +1,93 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>#{msg['app.title']}</title>
 </h:head>
 <h:body>
-	<ul>
-		<li><h:link outcome="cadastrarBiblioteca"
-				value="#{msg['app.cadastrarBiblioteca']}" /></li>
-		<li><h:link outcome="cadastrarCliente"
-				value="#{msg['app.cadastrarCliente']}" /></li>
-		<li><h:link outcome="cadastrarLivro"
-				value="#{msg['app.cadastrarLivro']}" /></li>
-		<h:outputLabel for="bibliotecas" value="#{msg['app.bibliotecas']}"/>
-		<p:dataTable id="bibliotecas" var="biblioteca" value="#{bibliotecasController.itens}">
-			<p:column headerText="#{msg['app.id']}">
-				<h:outputText value="#{biblioteca.id}" />
-			</p:column>
-			<p:column headerText="#{msg['bibliotecas.nomeBiblioteca']}">
-				<h:link outcome="gerenciarBiblioteca" value="#{biblioteca.nome}"/>
-			</p:column>
-			<p:column headerText="#{msg['app.remover']}">
-				<h:form>
-					<h:commandLink action="#{bibliotecasController.removerBiblioteca(biblioteca.id)}" value="#{msg['app.remover']}"/>
-				</h:form>
-			</p:column>
-		</p:dataTable>
-		<h:outputLabel for="clientes" value="#{msg['app.clientes']}"/>
-		<p:dataTable id="clientes" var="cliente" value="#{clientesController.itens}">
-			<p:column headerText="#{msg['app.cpf']}">
-				<h:outputText value="#{cliente.cpf}" />
-			</p:column>
-			<p:column headerText="#{msg['clientes.nomeCliente']}">
-				<h:link outcome="gerenciarCliente" value="#{cliente.nome}"/>
-			</p:column>
-			<p:column headerText="#{msg['app.remover']}">
-				<h:form>
-					<h:commandLink action="#{clientesController.removerCliente(cliente.id)}" value="#{msg['app.remover']}"/>
-				</h:form>
-			</p:column>
-		</p:dataTable>
-		<h:outputLabel for="livros" value="#{msg['app.livros']}"/>
-		<p:dataTable id="livros" var="livro" value="#{livrosController.itens}">
-			<p:column headerText="#{msg['app.isbn']}">
-				<h:outputText value="#{livro.isbn}" />
-			</p:column>
-			<p:column headerText="#{msg['livros.nomeLivro']}">
-				<h:link outcome="gerenciarLivro" value="#{livro.nome}"/>
-			</p:column>
-			<p:column headerText="#{msg['app.remover']}">
-				<h:form>
-					<h:commandLink action="#{livrosController.removerLivro(livro.id)}" value="#{msg['app.remover']}"/>
-				</h:form>
-			</p:column>
-		</p:dataTable>
-	</ul>
+	<p:outputPanel><h2>#{msg['app.title']}</h2></p:outputPanel>
+	<p:layout>
+		<p:layoutUnit position="west">
+			<p:menu>
+				<p:submenu label="#{msg['bibliotecas.biblioteca']}">
+					<p:menuitem value="#{msg['app.cadastrarBiblioteca']}"
+						outcome="cadastrarBiblioteca" />
+				</p:submenu>
+				<p:submenu label="#{msg['clientes.cliente']}">
+					<p:menuitem value="#{msg['app.cadastrarCliente']}"
+						outcome="cadastrarCliente" />
+				</p:submenu>
+				<p:submenu label="#{msg['livros.livro']}">
+					<p:menuitem value="#{msg['app.cadastrarLivro']}"
+						outcome="cadastrarLivro" />
+				</p:submenu>
+			</p:menu>
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<p:accordionPanel>
+				<p:tab title="#{msg['app.bibliotecas']}">
+					<h:panelGrid>
+						<p:dataTable id="bibliotecas" var="biblioteca"
+							value="#{bibliotecasController.itens}">
+							<p:column headerText="#{msg['app.id']}">
+								<p:outputLabel value="#{biblioteca.id}" />
+							</p:column>
+							<p:column headerText="#{msg['bibliotecas.nomeBiblioteca']}">
+								<p:link outcome="gerenciarBiblioteca" value="#{biblioteca.nome}" />
+							</p:column>
+							<p:column headerText="#{msg['app.remover']}">
+								<h:form>
+									<p:commandLink
+										action="#{bibliotecasController.removerBiblioteca(biblioteca)}"
+										value="#{msg['app.remover']}" />
+								</h:form>
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="#{msg['app.clientes']}">
+					<h:panelGrid>
+						<p:dataTable id="clientes" var="cliente"
+							value="#{clientesController.itens}">
+							<p:column headerText="#{msg['app.cpf']}">
+								<p:outputLabel value="#{cliente.cpf}" converter="cpfConverter" />
+							</p:column>
+							<p:column headerText="#{msg['clientes.nomeCliente']}">
+								<p:link outcome="gerenciarCliente" value="#{cliente.nome}" />
+							</p:column>
+							<p:column headerText="#{msg['app.remover']}">
+								<h:form>
+									<p:commandLink
+										action="#{clientesController.removerCliente(cliente)}"
+										value="#{msg['app.remover']}" />
+								</h:form>
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="#{msg['app.livros']}">
+					<h:panelGrid>
+						<p:dataTable id="livros" var="livro"
+							value="#{livrosController.itens}">
+							<p:column headerText="#{msg['app.isbn']}">
+								<p:outputLabel value="#{livro.isbn}" converter="isbnConverter" />
+							</p:column>
+							<p:column headerText="#{msg['livros.nomeLivro']}">
+								<p:link outcome="gerenciarLivro" value="#{livro.nome}" />
+							</p:column>
+							<p:column headerText="#{msg['app.remover']}">
+								<h:form>
+									<p:commandLink action="#{livrosController.removerLivro(livro)}"
+										value="#{msg['app.remover']}" />
+								</h:form>
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+	</p:layout>
 </h:body>
 </html>

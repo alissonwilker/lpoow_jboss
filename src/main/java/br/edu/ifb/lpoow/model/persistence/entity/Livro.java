@@ -21,8 +21,8 @@ public class Livro implements Serializable {
 	@Column(name = "ID", nullable = false, unique = true, length = 11)
 	private int id;
 
-	@Column(name = "ISBN", nullable = false, unique = true, length = 11)
-	private int isbn;
+	@Column(name = "ISBN", nullable = false, unique = true, length = 13)
+	private String isbn;
 
 	@Column(name = "NOME", length = 20, unique = false, nullable = false)
 	private String nome;
@@ -30,7 +30,7 @@ public class Livro implements Serializable {
 	public Livro() {
 	}
 
-	public Livro(int isbn, String nome) {
+	public Livro(String isbn, String nome) {
 		setIsbn(isbn);
 		setNome(nome);
 	}
@@ -43,11 +43,11 @@ public class Livro implements Serializable {
 		this.id = id;
 	}
 
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 

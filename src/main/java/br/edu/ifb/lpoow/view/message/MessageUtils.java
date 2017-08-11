@@ -1,9 +1,11 @@
-package br.edu.ifb.lpoow.view;
+package br.edu.ifb.lpoow.view.message;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
+
+import br.edu.ifb.lpoow.view.jsf.JsfUtils;
 
 public class MessageUtils {
 

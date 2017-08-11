@@ -1,4 +1,4 @@
-package br.edu.ifb.lpoow.view;
+package br.edu.ifb.lpoow.view.jsf;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

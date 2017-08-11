@@ -5,20 +5,24 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
+	<h:outputStylesheet name="css/style.css" />
 	<title>#{msg['app.title']}</title>
 </h:head>
 <h:body>
 	<p:layout>
 		<p:layoutUnit position="north">
-			<p:outputPanel>
-				<h2>#{msg['app.title']}</h2>
-			</p:outputPanel>
+			<h:panelGrid columns="2" styleClass="pageTitle">
+				<p:graphicImage styleClass="logo" name="images/logo.png" />
+				<p:outputLabel value="#{msg['app.title']}" />
+			</h:panelGrid>
 		</p:layoutUnit>
 		<p:layoutUnit position="west">
-			<ui:include src="../templates/menu.xhtml" />
+			<ui:include src="../facelets/menu.xhtml" />
 		</p:layoutUnit>
 		<p:layoutUnit position="center">
-			<ui:insert name="content"/>
+			<p:panel header="#{pageTitle}">
+				<ui:insert name="content" />
+			</p:panel>
 		</p:layoutUnit>
 	</p:layout>
 </h:body>

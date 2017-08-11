@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import br.edu.ifb.lpoow.exception.EntidadeJaExisteException;
 import br.edu.ifb.lpoow.model.persistence.entity.Livro;
-import br.edu.ifb.lpoow.view.MessageUtils;
+import br.edu.ifb.lpoow.view.message.MessageUtils;
 
 @Named
 @RequestScoped
@@ -26,7 +26,7 @@ public class LivrosController extends AbstractController<Livro, Integer> {
 
 	public String removerLivro(Livro livro) {
 		super.remover(livro);
-		return "app" + responseParams;
+		return "app";
 	}
 	
 }

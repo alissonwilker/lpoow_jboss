@@ -6,7 +6,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import br.edu.ifb.lpoow.view.MessageUtils;
+import br.edu.ifb.lpoow.view.message.MessageUtils;
 
 @FacesValidator(value = "cpfValidator")
 public class CpfValidator implements Validator {

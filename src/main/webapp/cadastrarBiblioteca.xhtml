@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="WEB-INF/facelets/formCadastro.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<title>#{msg['app.cadastrarBiblioteca']}</title>
-</h:head>
-<h:body>
-	<h:form>
+	<ui:param name="pageTitle" value="#{msg['app.cadastrarBiblioteca']}" />
+	<ui:define name="formCadastroContent">
 		<p:outputLabel for="nomeBiblioteca"
 			value="#{msg['bibliotecas.nomeBiblioteca']}:" />
 		<p:inputText id="nomeBiblioteca" required="true"
 			requiredMessage="#{msg['bibliotecas.digiteNomeBiblioteca']}"
 			value="#{nomeBiblioteca}"
 			a:placeholder="#{msg['bibliotecas.nomeBiblioteca']}" maxlength="20" />
-		<p />
 		<p:commandButton value="#{msg['app.ok']}"
 			action="#{bibliotecasController.adicionarBiblioteca(nomeBiblioteca)}" />
-	</h:form>
-	<p:messages autoUpdate="true" closable="true" />
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

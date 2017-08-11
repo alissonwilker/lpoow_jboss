@@ -5,7 +5,7 @@ import javax.inject.Named;
 
 import br.edu.ifb.lpoow.exception.EntidadeJaExisteException;
 import br.edu.ifb.lpoow.model.persistence.entity.Biblioteca;
-import br.edu.ifb.lpoow.view.MessageUtils;
+import br.edu.ifb.lpoow.view.message.MessageUtils;
 
 @Named
 @RequestScoped
@@ -26,7 +26,7 @@ public class BibliotecasController extends AbstractController<Biblioteca, Intege
 
 	public String removerBiblioteca(Biblioteca biblioteca) {
 		super.remover(biblioteca);
-		return "app" + responseParams;
+		return "app";  
 	}
 
 }

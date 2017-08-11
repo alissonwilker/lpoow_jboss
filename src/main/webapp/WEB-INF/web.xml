@@ -3,11 +3,11 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
 	<welcome-file-list>
-		<welcome-file>login.xhtml</welcome-file>
+		<welcome-file>app.xhtml</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
-		<location>/error.xhtml</location>
+		<location>/WEB-INF/pages/error.xhtml</location>
 	</error-page>
 	<servlet>
 		<display-name>FacesServlet</display-name>
@@ -23,4 +23,9 @@
 		<servlet-name>javax.ws.rs.core.Application</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
+	<!-- altera o diretorio de resources da webapp para um lugar protegido de acesso direto -->
+	<context-param>
+		<param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
+		<param-value>/WEB-INF/resources</param-value>
+	</context-param>
 </web-app>

@@ -5,7 +5,7 @@
 	version="2.2">
 	<application>
 		<resource-bundle>
-			<base-name>mensagens</base-name>
+			<base-name>i18n.mensagens</base-name>
 			<var>msg</var>
 		</resource-bundle>
 	</application>

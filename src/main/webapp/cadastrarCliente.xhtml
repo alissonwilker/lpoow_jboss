@@ -1,32 +1,24 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="WEB-INF/facelets/formCadastro.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<title>#{msg['app.cadastrarCliente']}</title>
-</h:head>
-<h:body>
-	<h:form>
+	<ui:param name="pageTitle" value="#{msg['app.cadastrarCliente']}" />
+	<ui:define name="formCadastroContent">
 		<p:outputLabel for="cpfCliente" value="#{msg['clientes.cpfCliente']}:" />
 		<p:inputMask id="cpfCliente" required="true"
 			requiredMessage="#{msg['clientes.digiteCpfCliente']}"
 			value="#{cpfCliente}" a:placeholder="#{msg['clientes.cpfCliente']}"
-			mask="#{msg['clientes.cpfMask']}" validator="cpfValidator" converter="cpfConverter">
+			mask="#{msg['clientes.cpfMask']}" validator="cpfValidator"
+			converter="cpfConverter">
 		</p:inputMask>
-		<p />
 		<p:outputLabel for="nomeCliente"
 			value="#{msg['clientes.nomeCliente']}:" />
 		<p:inputText id="nomeCliente" required="true"
 			requiredMessage="#{msg['clientes.digiteNomeCliente']}"
 			value="#{nomeCliente}" a:placeholder="#{msg['clientes.nomeCliente']}"
 			maxlength="20" />
-		<p />
 		<p:commandButton value="#{msg['app.ok']}"
 			action="#{clientesController.adicionarCliente(cpfCliente, nomeCliente)}" />
-	</h:form>
-	<p:messages autoUpdate="true" closable="true" />
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

@@ -1,70 +1,62 @@
-<ui:composition template="/WEB-INF/templates/layout.xhtml"
+<ui:composition template="WEB-INF/pages/layout.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+	<ui:param name="pageTitle" value="#{msg['app.inicio']}" />
 	<ui:define name="content">
-		<p:accordionPanel>
-			<p:tab title="#{msg['app.bibliotecas']}">
-				<h:panelGrid>
-					<p:dataTable id="bibliotecas" var="biblioteca"
-						value="#{bibliotecasController.itens}">
-						<p:column headerText="#{msg['app.id']}">
-							<p:outputLabel value="#{biblioteca.id}" />
-						</p:column>
-						<p:column headerText="#{msg['bibliotecas.nomeBiblioteca']}">
-							<p:link outcome="gerenciarBiblioteca" value="#{biblioteca.nome}" />
-						</p:column>
-						<p:column headerText="#{msg['app.remover']}">
-							<h:form>
-								<p:commandLink
-									action="#{bibliotecasController.removerBiblioteca(biblioteca)}"
-									value="#{msg['app.remover']}" />
-							</h:form>
-						</p:column>
-					</p:dataTable>
-				</h:panelGrid>
-			</p:tab>
-			<p:tab title="#{msg['app.clientes']}">
-				<h:panelGrid>
-					<p:dataTable id="clientes" var="cliente"
-						value="#{clientesController.itens}">
-						<p:column headerText="#{msg['app.cpf']}">
-							<p:outputLabel value="#{cliente.cpf}" converter="cpfConverter" />
-						</p:column>
-						<p:column headerText="#{msg['clientes.nomeCliente']}">
-							<p:link outcome="gerenciarCliente" value="#{cliente.nome}" />
-						</p:column>
-						<p:column headerText="#{msg['app.remover']}">
-							<h:form>
-								<p:commandLink
-									action="#{clientesController.removerCliente(cliente)}"
-									value="#{msg['app.remover']}" />
-							</h:form>
-						</p:column>
-					</p:dataTable>
-				</h:panelGrid>
-			</p:tab>
-			<p:tab title="#{msg['app.livros']}">
-				<h:panelGrid>
-					<p:dataTable id="livros" var="livro"
-						value="#{livrosController.itens}">
-						<p:column headerText="#{msg['app.isbn']}">
-							<p:outputLabel value="#{livro.isbn}" converter="isbnConverter" />
-						</p:column>
-						<p:column headerText="#{msg['livros.nomeLivro']}">
-							<p:link outcome="gerenciarLivro" value="#{livro.nome}" />
-						</p:column>
-						<p:column headerText="#{msg['app.remover']}">
-							<h:form>
-								<p:commandLink action="#{livrosController.removerLivro(livro)}"
-									value="#{msg['app.remover']}" />
-							</h:form>
-						</p:column>
-					</p:dataTable>
-				</h:panelGrid>
-			</p:tab>
-		</p:accordionPanel>
+		<p:fieldset legend="#{msg['app.bibliotecas']}">
+			<p:dataTable id="bibliotecas" var="biblioteca"
+				value="#{bibliotecasController.itens}" rows="3" paginator="true">
+				<p:column headerText="#{msg['app.id']}">
+					<p:outputLabel value="#{biblioteca.id}" />
+				</p:column>
+				<p:column headerText="#{msg['bibliotecas.nomeBiblioteca']}">
+					<p:link outcome="gerenciarBiblioteca" value="#{biblioteca.nome}" />
+				</p:column>
+				<p:column headerText="#{msg['app.remover']}">
+					<h:form>
+						<p:commandLink
+							action="#{bibliotecasController.removerBiblioteca(biblioteca)}"
+							value="#{msg['app.remover']}" ajax="true" update="bibliotecas" />
+					</h:form>
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
+		<p:fieldset legend="#{msg['app.clientes']}">
+			<p:dataTable id="clientes" var="cliente"
+				value="#{clientesController.itens}" rows="3" paginator="true">
+				<p:column headerText="#{msg['app.cpf']}">
+					<p:outputLabel value="#{cliente.cpf}" converter="cpfConverter" />
+				</p:column>
+				<p:column headerText="#{msg['clientes.nomeCliente']}">
+					<p:link outcome="gerenciarCliente" value="#{cliente.nome}" />
+				</p:column>
+				<p:column headerText="#{msg['app.remover']}">
+					<h:form>
+						<p:commandLink
+							action="#{clientesController.removerCliente(cliente)}"
+							value="#{msg['app.remover']}" ajax="true" update="clientes" />
+					</h:form>
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
+		<p:fieldset legend="#{msg['app.livros']}">
+			<p:dataTable id="livros" var="livro"
+				value="#{livrosController.itens}" rows="3" paginator="true">
+				<p:column headerText="#{msg['app.isbn']}">
+					<p:outputLabel value="#{livro.isbn}" converter="isbnConverter" />
+				</p:column>
+				<p:column headerText="#{msg['livros.nomeLivro']}">
+					<p:link outcome="gerenciarLivro" value="#{livro.nome}" />
+				</p:column>
+				<p:column headerText="#{msg['app.remover']}">
+					<h:form>
+						<p:commandLink action="#{livrosController.removerLivro(livro)}"
+							value="#{msg['app.remover']}" ajax="true" update="livros" />
+					</h:form>
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
 	</ui:define>
 </ui:composition>

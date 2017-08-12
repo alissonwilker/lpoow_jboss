@@ -33,6 +33,7 @@ public abstract class AbstractController<T, PK extends Serializable> implements 
 	@Override
 	public void remover(T entidade) {
 		business.remover(entidade);
+		MessageUtils.addInfoFacesMessage("app.sucesso"); 
 	}
 
 	@Override

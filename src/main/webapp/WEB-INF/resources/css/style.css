@@ -6,6 +6,10 @@
 	font-size: 150%;
 }
 
+.textAtCenter {
+	text-align: center;
+} 
+
 fieldset {
 	margin-bottom: 20px;
 }

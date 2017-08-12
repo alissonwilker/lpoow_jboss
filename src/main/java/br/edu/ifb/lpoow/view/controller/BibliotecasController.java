@@ -19,9 +19,4 @@ public class BibliotecasController extends AbstractController<Biblioteca, Intege
 		return null;
 	}
 
-	public String removerBiblioteca(Biblioteca biblioteca) {
-		super.remover(biblioteca);
-		return "app";
-	}
-
 }

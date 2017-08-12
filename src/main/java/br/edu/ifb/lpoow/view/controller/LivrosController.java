@@ -19,9 +19,4 @@ public class LivrosController extends AbstractController<Livro, Integer> {
 		return null;
 	}
 
-	public String removerLivro(Livro livro) {
-		super.remover(livro);
-		return "app";
-	}
-
 }

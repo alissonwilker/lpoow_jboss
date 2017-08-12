@@ -19,8 +19,4 @@ public class ClientesController extends AbstractController<Cliente, Integer> {
 		return null;
 	}
 
-	public String removerCliente(Cliente cliente) {
-		super.remover(cliente);
-		return "app";
-	}
 }

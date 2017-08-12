@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.edu.ifb.lpoow.exception.EntidadeJaExisteException;
 import br.edu.ifb.lpoow.model.business.IBusiness;
+import br.edu.ifb.lpoow.view.jsf.JsfUtils;
+import br.edu.ifb.lpoow.view.message.MessageUtils;
 
 public abstract class AbstractController<T, PK extends Serializable> implements IController<T, PK>, Serializable {
 
@@ -17,8 +19,15 @@ public abstract class AbstractController<T, PK extends Serializable> implements 
 	private IBusiness<T, PK> business;
 
 	@Override
-	public void adicionar(T entidade) throws EntidadeJaExisteException {
-		business.adicionar(entidade);
+	public boolean adicionar(T entidade) {
+		try {
+			business.adicionar(entidade);
+			MessageUtils.addInfoFacesMessage("app.sucesso");
+			return true;
+		} catch (EntidadeJaExisteException e) {
+			MessageUtils.addInfoFacesMessage("excecao.entidadeJaExiste", entidade.getClass().getSimpleName());
+			return false;
+		}
 	}
 
 	@Override
@@ -36,4 +45,8 @@ public abstract class AbstractController<T, PK extends Serializable> implements 
 		return business.recuperar(chavePrimaria);
 	}
 
+	protected String adicionarRedirecionamentoComMensagens(String target) {
+		JsfUtils.getFacesContext().getExternalContext().getFlash().setKeepMessages(true); 
+		return target + responseParams; 
+	}
 }

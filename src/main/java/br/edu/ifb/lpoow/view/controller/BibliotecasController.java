@@ -3,9 +3,7 @@ package br.edu.ifb.lpoow.view.controller;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
-import br.edu.ifb.lpoow.exception.EntidadeJaExisteException;
 import br.edu.ifb.lpoow.model.persistence.entity.Biblioteca;
-import br.edu.ifb.lpoow.view.message.MessageUtils;
 
 @Named
 @RequestScoped
@@ -15,18 +13,15 @@ public class BibliotecasController extends AbstractController<Biblioteca, Intege
 
 	public String adicionarBiblioteca(String nomeBiblioteca) {
 		Biblioteca biblioteca = new Biblioteca(nomeBiblioteca);
-		try {
-			super.adicionar(biblioteca);
-		} catch (EntidadeJaExisteException e) {
-			MessageUtils.addInfoFacesMessage("excecao.bibliotecaJaExiste");
-			return null;
+		if (super.adicionar(biblioteca)) {
+			return adicionarRedirecionamentoComMensagens("app");
 		}
-		return "app" + responseParams;
+		return null;
 	}
 
 	public String removerBiblioteca(Biblioteca biblioteca) {
 		super.remover(biblioteca);
-		return "app";  
+		return "app";
 	}
 
 }

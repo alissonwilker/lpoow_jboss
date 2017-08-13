@@ -14,6 +14,10 @@
 		<servlet-name>FacesServlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
+		<security-role-ref>
+			<role-name>ADMINISTRATOR</role-name>
+			<role-link>ADMINISTRATOR</role-link>
+		</security-role-ref>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FacesServlet</servlet-name>
@@ -34,11 +38,11 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>NAO_AUTENTICADO</web-resource-name>
-			<url-pattern>/login.xhtml</url-pattern> 
+			<url-pattern>/login.xhtml</url-pattern>
 		</web-resource-collection>
 	</security-constraint>
- 
-	<security-constraint> 
+
+	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>SOMENTE_AUTENTICADO</web-resource-name>
 			<url-pattern>/*</url-pattern>

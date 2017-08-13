@@ -23,9 +23,46 @@
 		<servlet-name>javax.ws.rs.core.Application</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
-	<!-- altera o diretorio de resources da webapp para um lugar protegido de acesso direto -->
+	<!-- altera o diretorio de resources da webapp para um lugar protegido de 
+		acesso direto -->
 	<context-param>
 		<param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
 		<param-value>/WEB-INF/resources</param-value>
 	</context-param>
+
+	<!--Defining security constraint for type of roles available -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>NAO_AUTENTICADO</web-resource-name>
+			<url-pattern>/login.xhtml</url-pattern> 
+		</web-resource-collection>
+	</security-constraint>
+ 
+	<security-constraint> 
+		<web-resource-collection>
+			<web-resource-name>SOMENTE_AUTENTICADO</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMINISTRATOR</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<!--Defining security constraint for type of roles available -->
+
+	<!--Defining type of authenitcation mechanism -->
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>MeuSecurityDomain</realm-name>
+		<form-login-config>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/WEB-INF/pages/loginFailed.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+	<!--Defining type of authenitcation mechanism -->
+
+	<!--Denining security role -->
+	<security-role>
+		<role-name>ADMINISTRATOR</role-name>
+	</security-role>
+	<!--Denining security role -->
 </web-app>

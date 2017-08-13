@@ -1,16 +1,21 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<p:menu >
-		<p:submenu label="#{msg['app.acoes']}">
-			<p:menuitem value="#{msg['app.inicio']}" outcome="app" />
-			<p:menuitem value="#{msg['app.cadastrarBiblioteca']}"
-				outcome="cadastrarBiblioteca" />
-			<p:menuitem value="#{msg['app.cadastrarCliente']}"
-				outcome="cadastrarCliente" />
-			<p:menuitem value="#{msg['app.cadastrarLivro']}"
-				outcome="cadastrarLivro" />
-		</p:submenu>
-	</p:menu>
+	<h:form>
+		<p:menu>
+			<p:submenu label="#{msg['app.acoes']}">
+				<p:menuitem value="#{msg['app.inicio']}" outcome="app" />
+				<p:menuitem value="#{msg['app.cadastrarBiblioteca']}"
+					outcome="cadastrarBiblioteca" />
+				<p:menuitem value="#{msg['app.cadastrarCliente']}"
+					outcome="cadastrarCliente" />
+				<p:menuitem value="#{msg['app.cadastrarLivro']}"
+					outcome="cadastrarLivro" />
+				<p:menuitem value="#{msg['app.logout']}"
+					action="#{loginController.logout}" />
+			</p:submenu>
+		</p:menu>
+	</h:form>
 </ui:composition>
 

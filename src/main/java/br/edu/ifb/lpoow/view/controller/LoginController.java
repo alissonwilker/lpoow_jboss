@@ -1,12 +1,15 @@
 package br.edu.ifb.lpoow.view.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
 
-import br.edu.ifb.lpoow.model.business.ILoginBusiness;
+import br.edu.ifb.lpoow.view.jsf.JsfUtils;
+import br.edu.ifb.lpoow.view.jsf.JsfUtils.Pagina;
+import br.edu.ifb.lpoow.view.message.MessageUtils;
 
 @Named
 @RequestScoped
@@ -14,22 +17,39 @@ public class LoginController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private ILoginBusiness loginBusiness;
+	@SuppressWarnings("unused")
+	private boolean autenticado;
 
-	private final String RESPONSE_PARAMS = "?faces-redirect=true";
+	public boolean isAutenticado() {
+		return JsfUtils.getRequest().getUserPrincipal() != null;
+	}
 
-	public String autenticar(String usuario, String senha) {
-		boolean isAutenticado = loginBusiness.autenticar(usuario, senha);
-		if (isAutenticado) {
-			return "loginSuccess" + RESPONSE_PARAMS;
-		} else {
-			return "loginFailed" + RESPONSE_PARAMS;
+	public void redirecionarSeAutenticado() throws IOException {
+		if (isAutenticado()) {
+			JsfUtils.redirecionar(Pagina.app);
 		}
 	}
 
-	public String getUsuarioAutenticado() {
-		return loginBusiness.getUsuarioAutenticado();
+	public String login(String usuario, String senha) {
+		try {
+			JsfUtils.getRequest().login(usuario, senha);
+		} catch (ServletException e) {
+			MessageUtils.addInfoFacesMessage("login.falhou");
+			return "";
+		}
+
+		return JsfUtils.getRedirecionamentoComMensagens(Pagina.app);
 	}
-	
+
+	public String logout() {
+		try {
+			JsfUtils.getRequest().logout();
+			return JsfUtils.getRedirecionamentoComMensagens(Pagina.login);
+		} catch (ServletException e) {
+			MessageUtils.addInfoFacesMessage("logout.falhou");
+		}
+
+		return "";
+	}
+
 }

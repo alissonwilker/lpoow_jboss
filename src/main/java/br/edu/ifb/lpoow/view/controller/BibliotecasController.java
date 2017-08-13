@@ -4,6 +4,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import br.edu.ifb.lpoow.model.persistence.entity.Biblioteca;
+import br.edu.ifb.lpoow.view.jsf.JsfUtils;
+import br.edu.ifb.lpoow.view.jsf.JsfUtils.Pagina;
 
 @Named
 @RequestScoped
@@ -14,9 +16,9 @@ public class BibliotecasController extends AbstractController<Biblioteca, Intege
 	public String adicionarBiblioteca(String nomeBiblioteca) {
 		Biblioteca biblioteca = new Biblioteca(nomeBiblioteca);
 		if (super.adicionar(biblioteca)) {
-			return adicionarRedirecionamentoComMensagens("app");
+			return JsfUtils.getRedirecionamentoComMensagens(Pagina.app);
 		}
-		return null;
+		return "";
 	}
 
 }

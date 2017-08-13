@@ -1,13 +1,6 @@
-CREATE TABLE Employee (
-  id int NOT NULL,
-  name varchar(20) DEFAULT NULL,
-  role varchar(20) DEFAULT NULL,
-  PRIMARY KEY (id)
-);
+-- scripts de criação da base para postgresql
+CREATE TABLE users (id SERIAL NOT NULL PRIMARY KEY, username VARCHAR(20) NOT NULL UNIQUE, 
+                    password VARCHAR(32) NOT NULL, role VARCHAR(15) NOT NULL);
+-- senha alisson
+INSERT INTO users (username, password, role) VALUES ('alisson', '48ca192d5394397a37e28e5b913dcdb5', 'ADMINISTRATOR');
 
-INSERT INTO Employee (id, name, role)
-VALUES
-	(3, 'Pankaj', 'CEO');
-INSERT INTO Employee (id, name, role)
-VALUES
-	(14, 'David', 'Developer');

@@ -18,11 +18,11 @@
 				<p:outputLabel value="#{msg['app.title']}" />
 			</h:panelGrid>
 		</p:layoutUnit>
-		<p:layoutUnit position="west">
+		<p:layoutUnit position="west" rendered="#{loginController.autenticado}">
 			<ui:include src="../facelets/menu.xhtml" />
 		</p:layoutUnit>
 		<p:layoutUnit position="center">
-			<p:panel header="#{pageTitle}">
+			<p:panel id="painelPrincipal" header="#{pageTitle}">
 				<ui:insert name="content" />
 			</p:panel>
 		</p:layoutUnit>

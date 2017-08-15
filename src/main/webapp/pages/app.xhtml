@@ -6,7 +6,7 @@
 	<ui:param name="pageTitle" value="#{msg['app.inicio']}" />
 	<ui:define name="content">
 		<p:fieldset legend="#{msg['app.bibliotecas']}">
-			<p:dataTable id="bibliotecas" var="biblioteca" 
+			<p:dataTable id="bibliotecas" var="biblioteca" reflow="true"  
 				value="#{bibliotecasController.itens}" rows="3" paginator="true"
 				emptyMessage="#{msg['app.nenhumItem']}">
 				<p:column headerText="#{msg['app.id']}">
@@ -27,7 +27,7 @@
 			</p:dataTable>
 		</p:fieldset>
 		<p:fieldset legend="#{msg['app.clientes']}">
-			<p:dataTable id="clientes" var="cliente"
+			<p:dataTable id="clientes" var="cliente" reflow="true" 
 				value="#{clientesController.itens}" rows="3" paginator="true"
 				emptyMessage="#{msg['app.nenhumItem']}">
 				<p:column headerText="#{msg['app.cpf']}">
@@ -47,7 +47,7 @@
 			</p:dataTable>
 		</p:fieldset>
 		<p:fieldset legend="#{msg['app.livros']}">
-			<p:dataTable id="livros" var="livro"
+			<p:dataTable id="livros" var="livro" reflow="true" 
 				value="#{livrosController.itens}" rows="3" paginator="true"
 				emptyMessage="#{msg['app.nenhumItem']}">
 				<p:column headerText="#{msg['app.isbn']}">

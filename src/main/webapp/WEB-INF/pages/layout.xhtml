@@ -11,21 +11,23 @@
 </h:head>
 <h:body>
 	<p:growl autoUpdate="true" />
-	<p:layout>
-		<p:layoutUnit position="north">
+	<div class="ui-g">
+		<div class="ui-g-12">
 			<h:panelGrid columns="2" styleClass="pageTitle">
 				<p:graphicImage styleClass="logo" name="images/logo.png" />
 				<p:outputLabel value="#{msg['app.title']}" />
 			</h:panelGrid>
-		</p:layoutUnit>
-		<p:layoutUnit position="west" rendered="#{loginController.autenticado}">
-			<ui:include src="../facelets/menu.xhtml" />
-		</p:layoutUnit>
-		<p:layoutUnit position="center">
-			<p:panel header="#{pageTitle}">
-				<ui:insert name="content" />
-			</p:panel>
-		</p:layoutUnit>
-	</p:layout>
+			<div class="ui-g-12 ui-lg-3">
+				<h:panelGrid rendered="#{loginController.autenticado}">
+					<ui:include src="../facelets/menu.xhtml" />
+				</h:panelGrid>
+			</div>
+			<div class="ui-g-12 ui-lg-9">
+				<p:panel header="#{pageTitle}">
+					<ui:insert name="content" />
+				</p:panel>
+			</div>
+		</div>
+	</div>
 </h:body>
 </html>

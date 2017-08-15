@@ -2,20 +2,21 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 	<ui:param name="pageTitle" value="#{msg['app.inicio']}" />
 	<ui:define name="content">
 		<p:fieldset legend="#{msg['app.bibliotecas']}">
 			<p:dataTable id="bibliotecas" var="biblioteca" reflow="true"  
 				value="#{bibliotecasController.itens}" rows="3" paginator="true"
 				emptyMessage="#{msg['app.nenhumItem']}">
-				<p:column headerText="#{msg['app.id']}">
+				<p:column styleClass="textAtCenter" headerText="#{msg['app.id']}">
 					<p:outputLabel value="#{biblioteca.id}" />
 				</p:column>
 				<p:column headerText="#{msg['bibliotecas.nomeBiblioteca']}">
 					<p:link outcome="gerenciarBiblioteca" value="#{biblioteca.nome}" />
 				</p:column>
-				<p:column headerText="#{msg['app.remover']}" styleClass="textAtCenter">
+				<p:column rendered="#{loginController.isUserInRole(fn:split('ADMINISTRATOR', ','))}" headerText="#{msg['app.remover']}" styleClass="textAtCenter">
 					<h:form>
 						<p:commandLink
 							action="#{bibliotecasController.remover(biblioteca)}" ajax="true"
@@ -30,7 +31,7 @@
 			<p:dataTable id="clientes" var="cliente" reflow="true" 
 				value="#{clientesController.itens}" rows="3" paginator="true"
 				emptyMessage="#{msg['app.nenhumItem']}">
-				<p:column headerText="#{msg['app.cpf']}">
+				<p:column styleClass="textAtCenter" headerText="#{msg['app.cpf']}">
 					<p:outputLabel value="#{cliente.cpf}" converter="cpfConverter" />
 				</p:column>
 				<p:column headerText="#{msg['clientes.nomeCliente']}">
@@ -50,7 +51,7 @@
 			<p:dataTable id="livros" var="livro" reflow="true" 
 				value="#{livrosController.itens}" rows="3" paginator="true"
 				emptyMessage="#{msg['app.nenhumItem']}">
-				<p:column headerText="#{msg['app.isbn']}">
+				<p:column styleClass="textAtCenter" headerText="#{msg['app.isbn']}">
 					<p:outputLabel value="#{livro.isbn}" converter="isbnConverter" />
 				</p:column>
 				<p:column headerText="#{msg['livros.nomeLivro']}">

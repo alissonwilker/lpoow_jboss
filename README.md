@@ -53,7 +53,7 @@ Outra configuração a ser feita no mesmo arquivo 'standalone.xml' diz respeito 
                 ...
             </security-domains>
  
-Obs.: note que o conteúdo acima faz referência ao DataSource configurado anteriormente nesse tutorial. Além disso, o conteúdo também faz referência à tabela 'users', que deve ser criada na base de dados referenciada pelo DataSource. Para isso, conecte-se à base de dados através de uma ferramenta de acesso ao PostgreSQL (como o pgAdmin, por exemplo) e execute o(s) script(s) presente(s) no diretório 'src/main/resources/sql/' desse projeto. Será criado um usuário 'admin' com senha 'admin' e perfil 'ADMINISTRATOR' para acesso à aplicação.
+Obs.: note que o conteúdo acima faz referência ao DataSource configurado anteriormente nesse tutorial. Além disso, o conteúdo também faz referência à tabela 'users', que deve ser criada na base de dados referenciada pelo DataSource. Para isso, conecte-se à base de dados através de uma ferramenta de acesso ao PostgreSQL (como o pgAdmin, por exemplo) e execute o(s) script(s) presente(s) no diretório 'src/main/resources/sql/' desse projeto. Será criado um usuário 'admin' com senha 'admin' e perfil 'ADMINISTRATOR' para acesso à aplicação (veja o script para outros usuários).
  
 Além disso, é preciso adicionar no servidor de aplicação um driver JDBC de acesso ao PostgreSQL. Para isso, crie o arquivo '<WILDFLY_HOME_DIR>/modules/system/layers/base/org/postgresql/main/module.xml' com o seguinte conteúdo:
 

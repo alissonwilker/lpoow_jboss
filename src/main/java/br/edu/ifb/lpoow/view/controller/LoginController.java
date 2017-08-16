@@ -7,9 +7,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 
-import br.edu.ifb.lpoow.view.jsf.JsfUtils;
-import br.edu.ifb.lpoow.view.jsf.JsfUtils.Pagina;
-import br.edu.ifb.lpoow.view.message.MessageUtils;
+import br.edu.ifb.lpoow.view.utils.FacesMessageUtils;
+import br.edu.ifb.lpoow.view.utils.JsfUtils;
+import br.edu.ifb.lpoow.view.utils.JsfUtils.Pagina;
 
 @Named
 @RequestScoped
@@ -43,7 +43,7 @@ public class LoginController implements Serializable {
 		try {
 			JsfUtils.getRequest().login(usuario, senha);
 		} catch (ServletException e) {
-			MessageUtils.addInfoFacesMessage("login.falhou");
+			FacesMessageUtils.addInfoFacesMessage("login.falhou");
 			return "";
 		}
 
@@ -55,7 +55,7 @@ public class LoginController implements Serializable {
 			JsfUtils.getRequest().logout();
 			return JsfUtils.getRedirecionamentoComMensagens(Pagina.login);
 		} catch (ServletException e) {
-			MessageUtils.addInfoFacesMessage("logout.falhou");
+			FacesMessageUtils.addInfoFacesMessage("logout.falhou");
 		}
 
 		return "";

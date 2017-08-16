@@ -6,7 +6,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import br.edu.ifb.lpoow.view.message.MessageUtils;
+import br.edu.ifb.lpoow.view.utils.FacesMessageUtils;
 
 @FacesValidator(value = "cpfValidator")
 public class CpfValidator implements Validator {
@@ -21,7 +21,7 @@ public class CpfValidator implements Validator {
 
 		if (cpf.length() != 11 || isCpfPadrao(cpf)
 				|| !calcularDigitoVerificador(cpf.substring(0, 9)).equals(cpf.substring(9, 11))) {
-			throw new ValidatorException(MessageUtils.getInfoFacesMessage("clientes.cpfValidator"));
+			throw new ValidatorException(FacesMessageUtils.getInfoFacesMessage("clientes.cpfValidator"));
 		}
 	}
 

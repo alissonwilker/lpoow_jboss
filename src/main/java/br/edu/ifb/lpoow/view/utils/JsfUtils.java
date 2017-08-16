@@ -1,4 +1,4 @@
-package br.edu.ifb.lpoow.view.jsf;
+package br.edu.ifb.lpoow.view.utils;
 
 import java.io.IOException;
 import java.util.Locale;

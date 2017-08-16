@@ -10,4 +10,5 @@ import br.edu.ifb.lpoow.model.persistence.entity.Biblioteca;
 public class BibliotecaBusiness extends AbstractBusiness<Biblioteca, Integer> {
 
 	private static final long serialVersionUID = 1L;
+
 }

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -28,10 +30,8 @@ public class Biblioteca implements Serializable {
 	private String nome;
 
 	@ManyToMany
+	@JoinTable(name = "Biblioteca_Livro", joinColumns = @JoinColumn(name = "BIBLIOTECA_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "LIVRO_ID", referencedColumnName = "ID"))
 	private List<Livro> livros = new ArrayList<Livro>();
-
-	@ManyToMany
-	private List<Cliente> clientes = new ArrayList<Cliente>();
 
 	public Biblioteca() {
 	}
@@ -42,10 +42,6 @@ public class Biblioteca implements Serializable {
 
 	public List<Livro> getLivros() {
 		return livros;
-	}
-
-	public List<Cliente> getClientes() {
-		return clientes;
 	}
 
 	public int getId() {

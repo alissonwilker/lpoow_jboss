@@ -6,7 +6,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-import br.edu.ifb.lpoow.view.message.MessageUtils;
+import br.edu.ifb.lpoow.view.utils.FacesMessageUtils;
 
 @FacesValidator(value = "isbnValidator")
 public class IsbnValidator implements Validator {
@@ -21,7 +21,7 @@ public class IsbnValidator implements Validator {
 
 		if (isbn.length() != 13 || (!isbn.startsWith("978") && !isbn.startsWith("979"))
 				|| !calcularDigitoVerificador(isbn.substring(0, 12)).equals(isbn.substring(12, 13))) {
-			throw new ValidatorException(MessageUtils.getInfoFacesMessage("livros.isbnValidator"));
+			throw new ValidatorException(FacesMessageUtils.getInfoFacesMessage("livros.isbnValidator"));
 		}
 	}
 

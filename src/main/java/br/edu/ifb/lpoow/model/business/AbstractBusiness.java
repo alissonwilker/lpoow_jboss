@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.edu.ifb.lpoow.exception.EntidadeJaExisteException;
+import br.edu.ifb.lpoow.exception.EntidadeJaExisteExcecao;
+import br.edu.ifb.lpoow.exception.EntidadeNaoEncontradaExcecao;
 import br.edu.ifb.lpoow.model.persistence.dao.IDao;
 
 public abstract class AbstractBusiness<T, PK extends Serializable> implements IBusiness<T, PK>, Serializable {
@@ -16,17 +17,17 @@ public abstract class AbstractBusiness<T, PK extends Serializable> implements IB
 	private IDao<T, PK> dao;
 
 	@Override
-	public void adicionar(T entidade) throws EntidadeJaExisteException {
+	public void adicionar(T entidade) throws EntidadeJaExisteExcecao {
 		dao.adicionar(entidade);
 	}
 
 	@Override
-	public void remover(T entidade) {
+	public void remover(T entidade) throws EntidadeNaoEncontradaExcecao {
 		dao.remover(entidade);
 	}
 
 	@Override
-	public T atualizar(T entidade) {
+	public T atualizar(T entidade) throws EntidadeNaoEncontradaExcecao {
 		return dao.atualizar(entidade);
 	}
 
@@ -36,7 +37,7 @@ public abstract class AbstractBusiness<T, PK extends Serializable> implements IB
 	}
 
 	@Override
-	public T recuperar(PK chavePrimaria) {
+	public T recuperar(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao {
 		return dao.recuperar(chavePrimaria);
 	}
 }

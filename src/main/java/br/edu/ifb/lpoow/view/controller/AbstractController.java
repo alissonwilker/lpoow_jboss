@@ -5,39 +5,57 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.edu.ifb.lpoow.exception.EntidadeJaExisteException;
-import br.edu.ifb.lpoow.model.business.IBusiness;
-import br.edu.ifb.lpoow.view.message.MessageUtils;
+import br.edu.ifb.lpoow.exception.EntidadeJaExisteExcecao;
+import br.edu.ifb.lpoow.exception.EntidadeNaoEncontradaExcecao;
+import br.edu.ifb.lpoow.model.business.facade.IBusinessFacade;
+import br.edu.ifb.lpoow.view.utils.FacesMessageUtils;
 
 public abstract class AbstractController<T, PK extends Serializable> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private IBusiness<T, PK> business;
+	private IBusinessFacade<T, PK> businessFacade;
 
 	public boolean adicionar(T entidade) {
 		try {
-			business.adicionar(entidade);
-			MessageUtils.addInfoFacesMessage("app.sucesso");
+			businessFacade.adicionar(entidade);
+			adicionarMensagemSucesso();
 			return true;
-		} catch (EntidadeJaExisteException e) {
-			MessageUtils.addInfoFacesMessage("excecao.entidadeJaExiste", entidade.getClass().getSimpleName());
+		} catch (EntidadeJaExisteExcecao e) {
+			FacesMessageUtils.addInfoFacesMessage("excecao.entidadeJaExiste", entidade.getClass().getSimpleName());
 			return false;
 		}
 	}
 
 	public void remover(T entidade) {
-		business.remover(entidade);
-		MessageUtils.addInfoFacesMessage("app.sucesso");
+		try {
+			businessFacade.remover(entidade);
+			adicionarMensagemSucesso();
+		} catch (EntidadeNaoEncontradaExcecao e) {
+			adicionarMensagemEntidadeNaoEncontrada();
+		}
 	}
 
 	public List<T> getItens() {
-		return business.listar();
+		return businessFacade.listar();
 	}
 
 	public T getItem(PK chavePrimaria) {
-		return business.recuperar(chavePrimaria);
+		try {
+			return businessFacade.recuperar(chavePrimaria);
+		} catch (EntidadeNaoEncontradaExcecao e) {
+			adicionarMensagemEntidadeNaoEncontrada();
+			return null;
+		}
+	}
+
+	private void adicionarMensagemEntidadeNaoEncontrada() {
+		FacesMessageUtils.addInfoFacesMessage("excecao.entidadeNaoEncontrada");
+	}
+
+	private void adicionarMensagemSucesso() {
+		FacesMessageUtils.addInfoFacesMessage("app.sucesso");
 	}
 
 }

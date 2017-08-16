@@ -9,13 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.PersistenceException;
-import javax.transaction.Transactional;
 
 import org.hibernate.exception.ConstraintViolationException;
 
-import br.edu.ifb.lpoow.exception.EntidadeJaExisteException;
+import br.edu.ifb.lpoow.exception.EntidadeJaExisteExcecao;
+import br.edu.ifb.lpoow.exception.EntidadeNaoEncontradaExcecao;
 
-@Transactional
 public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T, PK>, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +31,7 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T,
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> Class<T> getGenericTypeArgument(final Class<?> clazz, final int idx) {
+	private static <T> Class<T> getGenericTypeArgument(final Class<?> clazz, final int idx) {
 		final Type type = clazz.getGenericSuperclass();
 		ParameterizedType paramType;
 		try {
@@ -44,12 +43,12 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T,
 	}
 
 	@Override
-	public void adicionar(T entidade) throws EntidadeJaExisteException {
+	public void adicionar(T entidade) throws EntidadeJaExisteExcecao {
 		try {
 			entityManager.persist(entidade);
 		} catch (PersistenceException eeex) {
 			if (eeex.getCause() instanceof ConstraintViolationException) {
-				throw new EntidadeJaExisteException(eeex);
+				throw new EntidadeJaExisteExcecao(eeex);
 			} else {
 				throw eeex;
 			}
@@ -57,20 +56,32 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T,
 	}
 
 	@Override
-	public void remover(T entidade) {
-		entidade = entityManager.merge(entidade);
-		entityManager.remove(entidade);
+	public void remover(T entidade) throws EntidadeNaoEncontradaExcecao {
+		try {
+			entidade = entityManager.merge(entidade);
+			entityManager.remove(entidade);
+		} catch (IllegalArgumentException iaex) {
+			throw new EntidadeNaoEncontradaExcecao(iaex);
+		}
 	}
 
 	@Override
-	public T atualizar(T entidade) {
-		return entityManager.merge(entidade);
+	public T atualizar(T entidade) throws EntidadeNaoEncontradaExcecao {
+		try {
+			return entityManager.merge(entidade);
+		} catch (IllegalArgumentException iaex) {
+			throw new EntidadeNaoEncontradaExcecao(iaex);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T recuperar(PK chavePrimaria) {
-		return (T) entityManager.find(getDomainClass(), chavePrimaria);
+	public T recuperar(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao {
+		try {
+			return (T) entityManager.find(getDomainClass(), chavePrimaria);
+		} catch (IllegalArgumentException iaex) {
+			throw new EntidadeNaoEncontradaExcecao(iaex);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

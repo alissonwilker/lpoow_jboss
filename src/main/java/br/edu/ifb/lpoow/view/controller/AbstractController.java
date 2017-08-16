@@ -17,23 +17,23 @@ public abstract class AbstractController<T, PK extends Serializable> implements 
 	@Inject
 	private IBusinessFacade<T, PK> businessFacade;
 
-	public boolean adicionar(T entidade) {
+	public boolean adicionar(T dto) {
 		try {
-			businessFacade.adicionar(entidade);
+			businessFacade.adicionar(dto);
 			adicionarMensagemSucesso();
 			return true;
 		} catch (EntidadeJaExisteExcecao e) {
-			FacesMessageUtils.addInfoFacesMessage("excecao.entidadeJaExiste", entidade.getClass().getSimpleName());
+			FacesMessageUtils.addInfoFacesMessage("excecao.itemJaCadastrado");
 			return false;
 		}
 	}
 
-	public void remover(T entidade) {
+	public void remover(T dto) {
 		try {
-			businessFacade.remover(entidade);
+			businessFacade.remover(dto);
 			adicionarMensagemSucesso();
 		} catch (EntidadeNaoEncontradaExcecao e) {
-			adicionarMensagemEntidadeNaoEncontrada();
+			adicionarMensagemItemNaoEncontrado();
 		}
 	}
 
@@ -45,13 +45,13 @@ public abstract class AbstractController<T, PK extends Serializable> implements 
 		try {
 			return businessFacade.recuperar(chavePrimaria);
 		} catch (EntidadeNaoEncontradaExcecao e) {
-			adicionarMensagemEntidadeNaoEncontrada();
+			adicionarMensagemItemNaoEncontrado();
 			return null;
 		}
 	}
 
-	private void adicionarMensagemEntidadeNaoEncontrada() {
-		FacesMessageUtils.addInfoFacesMessage("excecao.entidadeNaoEncontrada");
+	private void adicionarMensagemItemNaoEncontrado() {
+		FacesMessageUtils.addInfoFacesMessage("excecao.itemNaoEncontrado");
 	}
 
 	private void adicionarMensagemSucesso() {

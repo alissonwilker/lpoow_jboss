@@ -70,5 +70,7 @@ Além disso, é preciso adicionar no servidor de aplicação um driver JDBC de a
 
 Obs.: note que o conteúdo desse XML faz referência ao jar do driver JDBC do PostgreSQL. Esse jar pode ser baixado do endereço 'https://mvnrepository.com/artifact/org.postgresql/postgresql/42.1.3' e deve ser colocado no mesmo diretório do arquivo 'module.xml'.
 
-Pronto! Digite 'mvn clean package' a partir do diretório raiz do projeto para compilar e empacotar a aplicação. O pacote WAR será criado no diretório 'target'.
+Pronto! Digite 'mvn clean package' a partir do diretório raiz do projeto para compilar e empacotar a aplicação. O pacote WAR será criado no diretório 'target'. 
+
+Se for utilizar a IDE Eclipse para compilar e fazer deploy da aplicação, é preciso instalar o plugin 'm2e-apt' a fim de habilitar o recurso de Annotation Processing utilizado pela biblioteca MapStruct. O plugin pode ser instalado a partir do Eclipse Market. Depois de instalar o plugin, entre em 'Eclipse -> Preferências -> Maven -> Annotation Processing' e selecione a opção 'Automatically configure JDT APT'.
 

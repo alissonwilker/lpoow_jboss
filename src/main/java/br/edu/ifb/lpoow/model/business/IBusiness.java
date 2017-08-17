@@ -8,14 +8,18 @@ import br.edu.ifb.lpoow.exception.EntidadeNaoEncontradaExcecao;
 
 public interface IBusiness<T, PK extends Serializable> {
 
-	public void adicionar(T entidade) throws EntidadeJaExisteExcecao;
+	public T adicionar(T entidade) throws EntidadeJaExisteExcecao;
 
 	public List<T> listar();
 
 	public void remover(T entidade) throws EntidadeNaoEncontradaExcecao;
 
+	public void remover(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao;
+
 	public T atualizar(T entidade) throws EntidadeNaoEncontradaExcecao;
 
 	public T recuperar(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao;
+
+	public T atualizar(PK chavePrimaria, T entidade) throws EntidadeNaoEncontradaExcecao;
 
 }

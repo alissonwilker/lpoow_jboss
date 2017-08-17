@@ -3,11 +3,11 @@ package br.edu.ifb.lpoow.dto.mapper;
 import java.util.List;
 
 public interface IGenericMapper<E, D> {
-	D converterParaDto(E biblioteca);
+	D converterParaDto(E entidade);
 
 	E converterParaEntidade(D dto);
 
-	List<D> converterParaDto(List<E> biblioteca);
+	List<D> converterParaDto(List<E> entidade);
 
 	List<E> converterParaEntidade(List<D> dto);
 }

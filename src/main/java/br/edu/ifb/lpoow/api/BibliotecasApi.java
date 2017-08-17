@@ -23,8 +23,11 @@ import br.edu.ifb.lpoow.dto.BibliotecaDto;
 import br.edu.ifb.lpoow.exception.EntidadeJaExisteExcecao;
 import br.edu.ifb.lpoow.exception.EntidadeNaoEncontradaExcecao;
 import br.edu.ifb.lpoow.model.business.facade.IBusinessFacade;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @Path("/bibliotecas")
+@Api(value = "bibliotecas")
 @Produces({ MediaType.APPLICATION_JSON })
 public class BibliotecasApi {
 	private final Logger logger = LoggerFactory.getLogger(BibliotecasApi.class);
@@ -34,12 +37,13 @@ public class BibliotecasApi {
 
 	@POST
 	@Path("/{nomeBiblioteca}")
+    @ApiOperation(value = "Adicionar uma biblioteca")
 	public Response adicionar(@PathParam("nomeBiblioteca") String nomeBiblioteca) {
 		BibliotecaDto bibliotecaDto = new BibliotecaDto(nomeBiblioteca);
 		try {
-			businessFacade.adicionar(bibliotecaDto);
+			bibliotecaDto = businessFacade.adicionar(bibliotecaDto);
 			return Response.created(new URI("/bibliotecas/" + bibliotecaDto.getId())).build();
-		} catch (EntidadeJaExisteExcecao e) {
+		} catch (EntidadeJaExisteExcecao e) { 
 			return Response.status(Status.CONFLICT).build();
 		} catch (URISyntaxException e) {
 			logger.error(e.getMessage(), e);
@@ -48,6 +52,7 @@ public class BibliotecasApi {
 	}
 
 	@GET
+    @ApiOperation(value = "Recuperar as bibliotecas", response = BibliotecaDto.class, responseContainer = "List")
 	public Response listar() {
 		List<BibliotecaDto> bibliotecasDto = businessFacade.listar();
 		return Response.ok(bibliotecasDto).build();
@@ -55,11 +60,10 @@ public class BibliotecasApi {
 
 	@DELETE
 	@Path("/{idBiblioteca}")
+    @ApiOperation(value = "Remover uma biblioteca")
 	public Response remover(@PathParam("idBiblioteca") Integer idBiblioteca) {
-		BibliotecaDto bibliotecaDto = new BibliotecaDto();
-		bibliotecaDto.setId(idBiblioteca);
 		try {
-			businessFacade.remover(bibliotecaDto);
+			businessFacade.remover(idBiblioteca);
 			return Response.ok().build();
 		} catch (EntidadeNaoEncontradaExcecao e) {
 			return Response.status(Status.NOT_FOUND).build();
@@ -68,20 +72,22 @@ public class BibliotecasApi {
 
 	@PUT
 	@Path("/{idBiblioteca}/atualizar/{nomeBiblioteca}")
+    @ApiOperation(value = "Atualizar uma biblioteca", response = BibliotecaDto.class)
 	public Response atualizar(@PathParam("idBiblioteca") Integer idBiblioteca,
 			@PathParam("nomeBiblioteca") String nomeBiblioteca) {
 		BibliotecaDto bibliotecaDto = new BibliotecaDto(nomeBiblioteca);
 		bibliotecaDto.setId(idBiblioteca);
 		try {
-			bibliotecaDto = businessFacade.atualizar(bibliotecaDto);
+			bibliotecaDto = businessFacade.atualizar(idBiblioteca, bibliotecaDto);
 			return Response.ok(bibliotecaDto).build();
 		} catch (EntidadeNaoEncontradaExcecao e) {
-			return Response.status(Status.NOT_FOUND).build();
+			return Response.status(Status.NOT_FOUND).build(); 
 		}
 	}
 
 	@GET
 	@Path("/{idBiblioteca}")
+    @ApiOperation(value = "Recuperar uma biblioteca", response = BibliotecaDto.class)
 	public Response recuperar(@PathParam("idBiblioteca") Integer idBiblioteca) {
 		BibliotecaDto bibliotecaDto;
 		try {

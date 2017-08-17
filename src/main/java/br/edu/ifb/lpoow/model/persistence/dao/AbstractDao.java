@@ -43,15 +43,26 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T,
 	}
 
 	@Override
-	public void adicionar(T entidade) throws EntidadeJaExisteExcecao {
+	public T adicionar(T entidade) throws EntidadeJaExisteExcecao {
 		try {
 			entityManager.persist(entidade);
+			return entidade;
 		} catch (PersistenceException eeex) {
 			if (eeex.getCause() instanceof ConstraintViolationException) {
 				throw new EntidadeJaExisteExcecao(eeex);
 			} else {
 				throw eeex;
 			}
+		}
+	}
+
+	@Override
+	public void remover(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao {
+		T entidade = recuperar(chavePrimaria);
+		if (entidade != null) {
+			entityManager.remove(entidade);
+		} else {
+			throw new EntidadeNaoEncontradaExcecao();
 		}
 	}
 
@@ -74,14 +85,27 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T,
 		}
 	}
 
+	@Override
+	public T atualizar(PK chavePrimaria, T entidade) throws EntidadeNaoEncontradaExcecao {
+		T entidadeRecuperada = recuperar(chavePrimaria);
+		if (entidadeRecuperada != null) {
+			try {
+				return entityManager.merge(entidade);
+			} catch (IllegalArgumentException iaex) {
+				throw new EntidadeNaoEncontradaExcecao(iaex);
+			}
+		}
+		throw new EntidadeNaoEncontradaExcecao();
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public T recuperar(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao {
-		try {
-			return (T) entityManager.find(getDomainClass(), chavePrimaria);
-		} catch (IllegalArgumentException iaex) {
-			throw new EntidadeNaoEncontradaExcecao(iaex);
+		T entity = (T) entityManager.find(getDomainClass(), chavePrimaria);
+		if (entity == null) {
+			throw new EntidadeNaoEncontradaExcecao();
 		}
+		return entity;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -89,5 +113,5 @@ public abstract class AbstractDao<T, PK extends Serializable> implements IDao<T,
 	public List<T> listar() {
 		return entityManager.createQuery("from " + getDomainClass().getSimpleName()).getResultList();
 	}
-
+	
 }

@@ -17,13 +17,18 @@ public abstract class AbstractBusiness<T, PK extends Serializable> implements IB
 	private IDao<T, PK> dao;
 
 	@Override
-	public void adicionar(T entidade) throws EntidadeJaExisteExcecao {
-		dao.adicionar(entidade);
+	public T adicionar(T entidade) throws EntidadeJaExisteExcecao {
+		return dao.adicionar(entidade);
 	}
 
 	@Override
 	public void remover(T entidade) throws EntidadeNaoEncontradaExcecao {
 		dao.remover(entidade);
+	}
+
+	@Override
+	public void remover(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao {
+		dao.remover(chavePrimaria);
 	}
 
 	@Override
@@ -40,4 +45,10 @@ public abstract class AbstractBusiness<T, PK extends Serializable> implements IB
 	public T recuperar(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao {
 		return dao.recuperar(chavePrimaria);
 	}
+	
+	@Override
+	public T atualizar(PK chavePrimaria, T entidade) throws EntidadeNaoEncontradaExcecao {
+		return dao.atualizar(chavePrimaria, entidade);
+	}
+
 }

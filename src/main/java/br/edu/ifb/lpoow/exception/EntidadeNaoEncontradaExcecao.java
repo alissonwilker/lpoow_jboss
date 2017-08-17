@@ -8,4 +8,8 @@ public class EntidadeNaoEncontradaExcecao extends Excecao {
 		super(iaex);
 	}
 
+	public EntidadeNaoEncontradaExcecao() {
+		super();
+	}
+
 }

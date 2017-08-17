@@ -19,8 +19,8 @@ public class AbstractFacade<E, D, PK extends Serializable> implements IBusinessF
 	protected IGenericMapper<E, D> mapper;
 
 	@Override
-	public void adicionar(D dto) throws EntidadeJaExisteExcecao {
-		business.adicionar(mapper.converterParaEntidade(dto));
+	public D adicionar(D dto) throws EntidadeJaExisteExcecao {
+		return mapper.converterParaDto(business.adicionar(mapper.converterParaEntidade(dto)));
 	}
 
 	@Override
@@ -41,6 +41,16 @@ public class AbstractFacade<E, D, PK extends Serializable> implements IBusinessF
 	@Override
 	public D recuperar(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao {
 		return mapper.converterParaDto(business.recuperar(chavePrimaria));
+	}
+
+	@Override
+	public void remover(PK chavePrimaria) throws EntidadeNaoEncontradaExcecao {
+		business.remover(chavePrimaria);
+	}
+
+	@Override
+	public D atualizar(PK chavePrimaria, D dto) throws EntidadeNaoEncontradaExcecao {
+		return mapper.converterParaDto(business.atualizar(chavePrimaria, mapper.converterParaEntidade(dto)));
 	}
 
 }

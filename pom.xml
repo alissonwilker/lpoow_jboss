@@ -6,6 +6,23 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/com.github.kongchen/swagger-maven-plugin -->
+		<dependency>
+			<groupId>com.github.kongchen</groupId>
+			<artifactId>swagger-maven-plugin</artifactId>
+			<version>${swagger.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-web</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-jdk8 -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
@@ -71,6 +88,34 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<version>${swagger.version}</version>
+				<configuration>
+					<apiSources>
+						<apiSource>
+							<locations>br.edu.ifb.lpoow.api</locations>
+							<info>
+								<title>API's do Libros</title>
+								<version>${project.version}</version>
+							</info>
+							<host>${ambiente.testes}</host>
+							<basePath>/api</basePath>
+							<schemes>http</schemes>
+							<swaggerDirectory>${project.basedir}/src/main/webapp/jaxrs-analyzer</swaggerDirectory>
+						</apiSource>
+					</apiSources>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler.version}</version>
@@ -88,6 +133,8 @@
 		<finalName>lpoow_jboss</finalName>
 	</build>
 	<properties>
+		<ambiente.testes>localhost:8080/lpoow_jboss</ambiente.testes>
+		<swagger.version>3.1.5</swagger.version>
 		<maven-compiler.version>3.5.1</maven-compiler.version>
 		<mapstruct.version>1.1.0.Final</mapstruct.version>
 		<jsf.version>2.2.14</jsf.version>

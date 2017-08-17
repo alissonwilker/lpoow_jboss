@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.ifb.lpoow.model.persistence.entity.Cliente;
 import br.edu.ifb.lpoow.model.persistence.entity.Livro;
 
 public class BibliotecaDto implements Serializable {
@@ -14,11 +13,10 @@ public class BibliotecaDto implements Serializable {
 	private int id;
 	private String nome;
 	private List<Livro> livros = new ArrayList<Livro>();
-	private List<Cliente> clientes = new ArrayList<Cliente>();
 
 	public BibliotecaDto() {
 	}
-	
+
 	public BibliotecaDto(String nomeBiblioteca) {
 		setNome(nomeBiblioteca);
 	}
@@ -45,14 +43,6 @@ public class BibliotecaDto implements Serializable {
 
 	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
-	}
-
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
 	}
 
 }

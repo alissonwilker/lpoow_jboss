@@ -24,6 +24,10 @@ public class LoginController implements Serializable {
 		return JsfUtils.getRequest().getUserPrincipal() != null;
 	}
 
+	public String getNomeUsuarioAutenticado() { 
+		return JsfUtils.getRequest().getUserPrincipal().getName();
+	}
+
 	public boolean isUserInRole(String... roles) {
 		boolean userIsInRole = false;
 		int i = 0;

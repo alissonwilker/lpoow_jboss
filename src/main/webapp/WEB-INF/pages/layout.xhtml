@@ -13,10 +13,22 @@
 	<p:growl autoUpdate="true" />
 	<div class="ui-g">
 		<div class="ui-g-12">
-			<h:panelGrid columns="2" styleClass="pageTitle">
-				<p:graphicImage styleClass="logo" name="images/logo.png" />
-				<p:outputLabel value="#{msg['app.title']}" />
-			</h:panelGrid>
+			<div class="ui-g-12 ">
+				<div style="vertical-align: middle" class="ui-g-12 ui-lg-11">
+					<p:graphicImage styleClass="logo" name="images/logo.png" />
+					<p:outputLabel styleClass="pageTitle" value="#{msg['app.title']}" />
+				</div>
+				<div class="ui-g-12 ui-lg-1">
+					<h:form>
+						<p:menuButton rendered="#{loginController.autenticado}" styleClass="nomeUsuario" value="#{loginController.nomeUsuarioAutenticado}">
+							<p:menuitem action="#{loginController.logout}">
+								<span class="fa fa-sign-out" aria-hidden="true"/>
+								<p:outputLabel value="#{msg['app.logout']}"/>
+							</p:menuitem>
+						</p:menuButton>
+					</h:form>
+				</div>
+			</div>
 			<div class="ui-g-12 ui-lg-3">
 				<h:panelGrid rendered="#{loginController.autenticado}">
 					<ui:include src="../facelets/menu.xhtml" />

@@ -2,6 +2,7 @@ package br.edu.ifb.lpoow.view.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.Principal;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -25,7 +26,11 @@ public class LoginController implements Serializable {
 	}
 
 	public String getNomeUsuarioAutenticado() { 
-		return JsfUtils.getRequest().getUserPrincipal().getName();
+		Principal principal = JsfUtils.getRequest().getUserPrincipal();
+		if (principal != null) {
+			return principal.getName(); 
+		}
+		return "";
 	}
 
 	public boolean isUserInRole(String... roles) {

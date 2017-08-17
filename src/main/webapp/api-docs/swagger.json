@@ -4,7 +4,7 @@
     "version" : "0.0.1-SNAPSHOT",
     "title" : "API's do Libros"
   },
-  "host" : "localhost:8080/lpoow_jboss",
+  "host" : "localhost:8080/libros",
   "basePath" : "/api",
   "tags" : [ {
     "name" : "bibliotecas"

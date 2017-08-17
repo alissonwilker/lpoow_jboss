@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.edu.ifb</groupId>
-	<artifactId>lpoow_jboss</artifactId>
-	<packaging>war</packaging>
+	<artifactId>libros</artifactId>
+	<packaging>war</packaging> 
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/com.github.kongchen/swagger-maven-plugin -->
@@ -130,10 +130,10 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>lpoow_jboss</finalName>
+		<finalName>libros</finalName>
 	</build>
 	<properties>
-		<ambiente.testes>localhost:8080/lpoow_jboss</ambiente.testes>
+		<ambiente.testes>localhost:8080/libros</ambiente.testes>
 		<swagger.version>3.1.5</swagger.version>
 		<maven-compiler.version>3.5.1</maven-compiler.version>
 		<mapstruct.version>1.1.0.Final</mapstruct.version>

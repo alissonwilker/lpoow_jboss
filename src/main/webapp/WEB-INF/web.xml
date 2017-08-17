@@ -1,91 +1,76 @@
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	version="3.1">
-	<welcome-file-list>
-		<welcome-file>/pages/app.xhtml</welcome-file>
-		<welcome-file>/index.html</welcome-file>
-	</welcome-file-list> 
-	<error-page>
-		<exception-type>java.lang.Throwable</exception-type>
-		<location>/WEB-INF/pages/error.xhtml</location>
-	</error-page>
-	<servlet>
-		<display-name>FacesServlet</display-name>
-		<servlet-name>FacesServlet</servlet-name>
-		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-		<security-role-ref>
-			<role-name>ADMINISTRATOR</role-name>
-			<role-link>ADMINISTRATOR</role-link>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>USER</role-name>
-			<role-link>USER</role-link>
-		</security-role-ref>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FacesServlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>javax.ws.rs.core.Application</servlet-name>
-		<url-pattern>/api/*</url-pattern>
-	</servlet-mapping>
-	<!-- altera o diretorio de resources da webapp para um lugar protegido de 
-		acesso direto -->
-	<context-param>
-		<param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
-		<param-value>/WEB-INF/resources</param-value>
-	</context-param>
-
-	<!--Defining security constraint for type of roles available -->
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>CADASTRAR_BIBLIOTECA</web-resource-name> 
-			<url-pattern>/pages/cadastrarBiblioteca.xhtml</url-pattern>
-		</web-resource-collection> 
-		<auth-constraint>
-			<role-name>ADMINISTRATOR</role-name>
-		</auth-constraint> 
-	</security-constraint> 
-
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>GERENCIAR</web-resource-name>
-			<url-pattern>/pages/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>USER</role-name>
-			<role-name>ADMINISTRATOR</role-name>
-		</auth-constraint>
-	</security-constraint>
-
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>NAO_AUTENTICADO</web-resource-name>
-			<url-pattern>/pages/login.xhtml</url-pattern>
-		</web-resource-collection>
-	</security-constraint>
-	<!--Defining security constraint for type of roles available -->
-
-	<!--Defining type of authenitcation mechanism -->
-	<login-config>
-		<auth-method>FORM</auth-method>
-		<realm-name>MeuSecurityDomain</realm-name>
-		<form-login-config>
-			<form-login-page>/pages/login.xhtml</form-login-page>
-			<form-error-page>/WEB-INF/pages/loginFailed.xhtml</form-error-page>
-		</form-login-config>
-	</login-config>
-	<!--Defining type of authenitcation mechanism -->
-
-	<!--Denining security role -->
-	<security-role>
-		<role-name>ADMINISTRATOR</role-name>
-	</security-role>
-	<security-role>
-		<role-name>USER</role-name>
-	</security-role>
-	<!--Denining security role -->
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <welcome-file-list>
+    <welcome-file>/pages/app.xhtml</welcome-file>
+    <welcome-file>/index.html</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/WEB-INF/pages/error.xhtml</location>
+  </error-page>
+  <servlet>
+    <display-name>FacesServlet</display-name>
+    <servlet-name>FacesServlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+    <security-role-ref>
+      <role-name>ADMINISTRATOR</role-name>
+      <role-link>ADMINISTRATOR</role-link>
+    </security-role-ref>
+    <security-role-ref>
+      <role-name>USER</role-name>
+      <role-link>USER</role-link>
+    </security-role-ref>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FacesServlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>javax.ws.rs.core.Application</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
+    <param-value>/WEB-INF/resources</param-value>
+  </context-param>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>CADASTRAR_BIBLIOTECA</web-resource-name>
+      <url-pattern>/pages/cadastrarBiblioteca.xhtml</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>ADMINISTRATOR</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>GERENCIAR</web-resource-name>
+      <url-pattern>/pages/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>USER</role-name>
+      <role-name>ADMINISTRATOR</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>NAO_AUTENTICADO</web-resource-name>
+      <url-pattern>/pages/login.xhtml</url-pattern>
+    </web-resource-collection>
+  </security-constraint>
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>MeuSecurityDomain</realm-name>
+    <form-login-config>
+      <form-login-page>/pages/login.xhtml</form-login-page>
+      <form-error-page>/WEB-INF/pages/loginFailed.xhtml</form-error-page>
+    </form-login-config>
+  </login-config>
+  <security-role>
+    <role-name>ADMINISTRATOR</role-name>
+  </security-role>
+  <security-role>
+    <role-name>USER</role-name>
+  </security-role>
 </web-app>

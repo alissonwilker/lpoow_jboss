@@ -4,7 +4,8 @@
 	version="3.1">
 	<welcome-file-list>
 		<welcome-file>/pages/app.xhtml</welcome-file>
-	</welcome-file-list>
+		<welcome-file>/index.html</welcome-file>
+	</welcome-file-list> 
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/WEB-INF/pages/error.xhtml</location>

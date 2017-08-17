@@ -102,7 +102,7 @@
 							<host>${ambiente.testes}</host>
 							<basePath>/api</basePath>
 							<schemes>http</schemes>
-							<swaggerDirectory>${project.basedir}/src/main/webapp/jaxrs-analyzer</swaggerDirectory>
+							<swaggerDirectory>${project.basedir}/src/main/webapp/api-docs</swaggerDirectory>
 						</apiSource>
 					</apiSources>
 				</configuration>
